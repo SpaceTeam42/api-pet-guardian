@@ -32,7 +32,7 @@ export class User {
   password: string;
 
   @Column('varchar')
-  type: UserTypeEnum;
+  type: keyof typeof UserTypeEnum;
 
   @Column('boolean')
   enabled: boolean;

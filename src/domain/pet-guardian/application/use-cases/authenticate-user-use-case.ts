@@ -1,5 +1,3 @@
-import { inject, injectable } from 'tsyringe';
-
 import { addDays } from 'date-fns';
 
 import { AppError } from '@core/errors/AppError';
@@ -25,19 +23,14 @@ type IResponse = {
   refresh_token: string;
 };
 
-@injectable()
 export class AuthenticateUserUseCase {
   constructor(
-    @inject('UsersRepository')
     private usersRepository: IUsersRepository,
 
-    @inject('UsersRefreshesTokensRepository')
     private userRefreshTokensRepository: IUsersRefreshesTokensRepository,
 
-    @inject('HashComparerProvider')
     private hashComparer: IHashComparer,
 
-    @inject('EncrypterProvider')
     private encrypter: Encrypter,
   ) {}
 

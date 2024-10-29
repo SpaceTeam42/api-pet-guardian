@@ -1,14 +1,12 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 
-import { container } from 'tsyringe';
-
 import { instanceToInstance } from 'class-transformer';
 
 import { AppError } from '@core/errors/AppError';
 
 import { z as zod } from 'zod';
 
-import { AuthenticateUserUseCase } from '@domain/pet-guardian/application/use-cases/authenticate-user-use-case';
+import { makeAuthenticateUserUseCase } from '../containers/factories/make-user-authenticate-use-case';
 
 export async function authenticateUserController(
   request: FastifyRequest,
@@ -22,7 +20,8 @@ export async function authenticateUserController(
   const { email, password } = authenticateUserBodySchema.parse(request.body);
 
   try {
-    const authenticateUserUseCase = container.resolve(AuthenticateUserUseCase);
+    const authenticateUserUseCase = makeAuthenticateUserUseCase(reply);
+    // return reply.status(201).send({ email, password });
 
     const { user, token, refresh_token } =
       await authenticateUserUseCase.execute({ email, password });

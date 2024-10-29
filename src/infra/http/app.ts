@@ -8,6 +8,8 @@ import fastify from 'fastify';
 
 import '@infra/database/typeorm';
 
+import '@infra/http/containers';
+
 import { jwtModule } from '@infra/auth/jwt-module';
 
 import { appRoutes } from './routes';
