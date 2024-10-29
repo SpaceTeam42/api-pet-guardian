@@ -23,7 +23,7 @@ export class PetImage {
   @Column('uuid')
   pet_id: string;
 
-  @Column()
+  @Column('varchar')
   image: string;
 
   @CreateDateColumn()

@@ -21,23 +21,23 @@ export class User {
   @PrimaryColumn('uuid')
   id: string;
 
-  @Column()
+  @Column('varchar')
   name: string;
 
-  @Column()
+  @Column('varchar')
   email: string;
 
-  @Column()
+  @Column('varchar')
   @Exclude()
   password: string;
 
-  @Column()
+  @Column('varchar')
   type: UserTypeEnum;
 
-  @Column()
+  @Column('boolean')
   enabled: boolean;
 
-  @Column()
+  @Column('varchar')
   avatar: string;
 
   @CreateDateColumn()

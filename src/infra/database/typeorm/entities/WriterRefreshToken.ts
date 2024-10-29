@@ -16,13 +16,13 @@ class WriterRefreshToken {
   @PrimaryColumn('uuid')
   id: string;
 
-  @Column()
+  @Column('varchar')
   refresh_token: string;
 
   @Column('uuid')
   writer_id: string;
 
-  @Column()
+  @Column('date')
   expires_date: Date;
 
   @CreateDateColumn()

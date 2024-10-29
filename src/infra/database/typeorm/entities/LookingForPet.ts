@@ -28,58 +28,58 @@ export class LookingForPet {
   @PrimaryColumn('uuid')
   id: string;
 
-  @Column()
+  @Column('varchar')
   name_pet: string;
 
-  @Column()
+  @Column('varchar')
   breed: string;
 
-  @Column()
+  @Column('varchar')
   gender: string;
 
-  @Column()
+  @Column('uuid')
   category_id: string;
 
-  @Column()
+  @Column('varchar')
   name_tutor: string;
 
-  @Column()
+  @Column('varchar')
   phone_tutor: string;
 
-  @Column()
+  @Column('boolean')
   phone_tutor_is_whatsapp: boolean;
 
-  @Column()
+  @Column('varchar')
   last_seen: string;
 
-  @Column()
+  @Column('text')
   description: string;
 
-  @Column()
+  @Column('boolean')
   is_found: boolean;
 
-  @Column()
+  @Column('boolean')
   is_reward: boolean;
 
-  @Column()
+  @Column('int')
   reward_amount: number;
 
-  @Column()
+  @Column('varchar')
   avatar: string;
 
-  @Column()
+  @Column('varchar')
   state: string;
 
-  @Column()
+  @Column('varchar')
   city: string;
 
-  @Column()
+  @Column('boolean')
   enabled: boolean;
 
-  @Column()
+  @Column('uuid')
   tutor_id: string;
 
-  @Column()
+  @Column('uuid')
   user_id: string;
 
   @CreateDateColumn()

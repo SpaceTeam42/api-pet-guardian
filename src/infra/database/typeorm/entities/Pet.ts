@@ -35,43 +35,43 @@ export class Pet {
   @PrimaryColumn('uuid')
   id: string;
 
-  @Column()
+  @Column('varchar')
   name: string;
 
-  @Column()
+  @Column('date')
   birthday: Date;
 
-  @Column()
+  @Column('varchar')
   breed: string;
 
   @Column('uuid')
   category_id: string;
 
-  @Column()
+  @Column('varchar')
   gender: string;
 
-  @Column()
+  @Column('varchar')
   size: string;
 
-  @Column()
+  @Column('varchar')
   weight: string;
 
-  @Column()
+  @Column('varchar')
   city: string;
 
-  @Column()
+  @Column('varchar')
   state: string;
 
-  @Column()
+  @Column('varchar')
   avatar: string;
 
   @Column('uuid')
   tutor_id: string;
 
-  @Column()
+  @Column('boolean')
   adopted: boolean;
 
-  @Column()
+  @Column('text')
   description: string;
 
   @CreateDateColumn()

@@ -19,8 +19,8 @@ export class CreateUserUseCase {
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
 
-    @inject('HashProvider')
-    private hashProvider: IHashGenerator,
+    @inject('HashGeneratorProvider')
+    private hashGenerator: IHashGenerator,
   ) {}
 
   public async execute({
@@ -39,7 +39,7 @@ export class CreateUserUseCase {
       throw new AppError('User type invalid!', 400);
     }
 
-    const passwordHash = await this.hashProvider.hash(password);
+    const passwordHash = await this.hashGenerator.hash(password);
 
     const user = await this.usersRepository.create({
       name,

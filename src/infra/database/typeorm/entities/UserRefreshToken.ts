@@ -16,13 +16,13 @@ class UserRefreshToken {
   @PrimaryColumn('uuid')
   id: string;
 
-  @Column()
+  @Column('varchar')
   refresh_token: string;
 
   @Column('uuid')
   user_id: string;
 
-  @Column()
+  @Column('date')
   expires_date: Date;
 
   @CreateDateColumn()

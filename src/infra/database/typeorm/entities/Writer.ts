@@ -17,23 +17,23 @@ class Writer {
   @PrimaryColumn('uuid')
   id: string;
 
-  @Column()
+  @Column('varchar')
   name: string;
 
-  @Column()
+  @Column('varchar')
   email: string;
 
   @Exclude()
-  @Column()
+  @Column('varchar')
   password: string;
 
-  @Column()
+  @Column('varchar')
   avatar?: string;
 
-  @Column()
+  @Column('varchar')
   instagram?: string;
 
-  @Column()
+  @Column('boolean')
   enabled: boolean;
 
   @CreateDateColumn()

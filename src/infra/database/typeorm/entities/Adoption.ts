@@ -19,7 +19,7 @@ class Adoption {
   @PrimaryColumn('uuid')
   id: string;
 
-  @Column()
+  @Column('varchar')
   short_code: string;
 
   @Column('uuid')
@@ -44,7 +44,7 @@ class Adoption {
   }
 
   // RELATIONS
-  @ManyToOne(() => Tutor, tutor => tutor.adoptions)
+  @ManyToOne(() => Tutor, (tutor) => tutor.adoptions)
   @JoinColumn({ name: 'tutor_id' })
   tutor: Tutor;
 

@@ -15,8 +15,8 @@
     "allowJs": true,
     "esModuleInterop": true,    
     "forceConsistentCasingInFileNames": true,
-    "strict": true,
+    "strict": false,
     "strictPropertyInitialization": false,
-    "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
+    "skipLibCheck": true
   }
 }

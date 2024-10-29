@@ -16,13 +16,13 @@ export class TutorRefreshToken {
   @PrimaryColumn('uuid')
   id: string;
 
-  @Column()
+  @Column('varchar')
   refresh_token: string;
 
   @Column('uuid')
   tutor_id: string;
 
-  @Column()
+  @Column('date')
   expires_date: Date;
 
   @CreateDateColumn()

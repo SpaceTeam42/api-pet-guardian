@@ -22,13 +22,13 @@ export class Category {
   @PrimaryColumn('uuid')
   id: string;
 
-  @Column()
+  @Column('varchar')
   name: string;
 
-  @Column()
+  @Column('varchar')
   icon?: string;
 
-  @Column()
+  @Column('boolean')
   enabled: boolean;
 
   @CreateDateColumn()

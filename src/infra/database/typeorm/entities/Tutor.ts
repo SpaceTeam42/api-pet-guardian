@@ -26,65 +26,65 @@ class Tutor {
   @PrimaryColumn('uuid')
   id: string;
 
-  @Column()
+  @Column('varchar')
   name: string;
 
-  @Column()
+  @Column('varchar')
   email: string;
 
-  @Column()
+  @Column('varchar')
   @Exclude()
   password: string;
 
-  @Column()
+  @Column('varchar')
   type: TutorTypeEnum;
 
-  @Column()
+  @Column('varchar')
   cnpj_cpf: string;
 
-  @Column()
+  @Column('varchar')
   manager_ong?: string;
 
-  @Column()
+  @Column('varchar')
   avatar?: string;
 
-  @Column()
+  @Column('varchar')
   personal_phone: string;
 
-  @Column()
+  @Column('varchar')
   personal_phone_is_whatsapp: boolean;
 
-  @Column()
+  @Column('varchar')
   public_phone?: string;
 
-  @Column()
+  @Column('varchar')
   public_phone_is_whatsapp?: boolean;
 
-  @Column()
+  @Column('boolean')
   enabled: boolean;
 
-  @Column()
+  @Column('varchar')
   street_name: string;
 
-  @Column()
+  @Column('varchar')
   street_number: string;
 
-  @Column()
+  @Column('varchar')
   complement?: string;
 
-  @Column()
+  @Column('varchar')
   neighborhood: string;
 
-  @Column()
+  @Column('varchar')
   postal_code: string;
 
-  @Column()
+  @Column('varchar')
   reference?: string;
 
-  @Column()
+  @Column('varchar')
   state: string;
 
-  @Column()
+  @Column('varchar')
   city: string;
 
   @CreateDateColumn()
@@ -129,11 +129,11 @@ class Tutor {
   }
 
   // RELATIONS
-  @OneToMany(() => Pet, pet => pet.tutor)
+  @OneToMany(() => Pet, (pet) => pet.tutor)
   @JoinColumn({ name: 'tutor_id' })
   pets: Pet[];
 
-  @OneToMany(() => Adoption, adoption => adoption.tutor)
+  @OneToMany(() => Adoption, (adoption) => adoption.tutor)
   @JoinColumn({ name: 'tutor_id' })
   adoptions: Adoption[];
 }
