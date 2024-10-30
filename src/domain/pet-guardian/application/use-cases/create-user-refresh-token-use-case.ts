@@ -1,15 +1,22 @@
 import { addDays } from 'date-fns';
 
+import { verify } from 'jsonwebtoken';
+
 import authConfig from '@config/auth';
+
+import { env } from '@infra/env';
 
 import { AppError } from '@core/errors/AppError';
 
 import { IUsersRefreshesTokensRepository } from '../repositories/users-refreshes-tokens-repository';
 import { Encrypter } from '../cryptography/encrypter';
 
+type IPayload = {
+  sub: string;
+};
+
 type IRequest = {
-  userId: string;
-  refreshToken;
+  refreshToken: string;
 };
 
 type IResponse = {
@@ -23,7 +30,17 @@ export class CreateUserRefreshTokenUseCase {
     private userRefreshTokensRepository: IUsersRefreshesTokensRepository,
   ) {}
 
-  async execute({ userId, refreshToken }: IRequest): Promise<IResponse> {
+  async execute({ refreshToken }: IRequest): Promise<IResponse> {
+    const { sub } = verify(
+      refreshToken,
+      Buffer.from(env.JWT_PRIVATE_KEY, 'base64'),
+      {
+        algorithms: ['RS256'],
+      },
+    ) as IPayload;
+
+    const userId = sub;
+
     const userRefreshToken =
       await this.userRefreshTokensRepository.findByUserIdAndRefreshToken(
         userId,

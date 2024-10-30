@@ -12,10 +12,6 @@ export async function createUserRefreshTokenController(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
-  await request.jwtVerify({ algorithms: ['RS256'] });
-
-  const userId = request.user.sub;
-
   const createUserRefreshTokenBodySchema = zod.object({
     refresh_token: zod.string(),
   });
@@ -27,7 +23,6 @@ export async function createUserRefreshTokenController(
     const authenticateUserUseCase = makeCreateUserRefreshTokenUseCase(reply);
 
     const { token, refresh_token } = await authenticateUserUseCase.execute({
-      userId,
       refreshToken,
     });
 
