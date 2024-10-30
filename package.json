@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsnd -r tsconfig-paths/register src/infra/http/server.ts",
+    "dev": "tsnd --files -r tsconfig-paths/register src/infra/http/server.ts",
     "start": "node build/server.js",
     "build": "tsup src --out-dir build"
   },
