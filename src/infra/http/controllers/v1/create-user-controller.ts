@@ -8,7 +8,7 @@ import { instanceToInstance } from 'class-transformer';
 
 import { AppError } from '@core/errors/AppError';
 
-import { CreateUserUseCase } from '@domain/pet-guardian/application/use-cases/create-user-use-case';
+import { CreateUserUseCase } from '@domain/pet-guardian/application/use-cases/v1/create-user-use-case';
 
 export async function createUserController(
   request: FastifyRequest,

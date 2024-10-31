@@ -4,11 +4,11 @@ import { AppError } from '@core/errors/AppError';
 
 import authConfig from '@config/auth';
 
-import { IHashComparer } from '../cryptography/hash-comparer';
-import { Encrypter } from '../cryptography/encrypter';
+import { IHashComparer } from '@domain/pet-guardian/application/cryptography/hash-comparer';
+import { Encrypter } from '@domain/pet-guardian/application/cryptography/encrypter';
 
-import { IUsersRepository } from '../repositories/users-repository';
-import { IUsersRefreshesTokensRepository } from '../repositories/users-refreshes-tokens-repository';
+import { IUsersRepository } from '@domain/pet-guardian/application/repositories/v1/users-repository';
+import { IUsersRefreshesTokensRepository } from '@domain/pet-guardian/application/repositories/v1/users-refreshes-tokens-repository';
 
 import { User } from '@infra/database/typeorm/entities/User';
 

@@ -6,7 +6,7 @@ import { JwtEncrypter } from '@infra/cryptography/jwt-encrypter';
 import { UsersRepository } from '@infra/database/repositories/typeorm/typeorm-users-repository';
 import { UsersRefreshesTokensRepository } from '@infra/database/repositories/typeorm/typeorm-users-refreshes-tokens-repository';
 
-import { AuthenticateUserUseCase } from '@domain/pet-guardian/application/use-cases/authenticate-user-use-case';
+import { AuthenticateUserUseCase } from '@domain/pet-guardian/application/use-cases/v1/authenticate-user-use-case';
 
 export function makeAuthenticateUserUseCase(reply: FastifyReply) {
   const usersRepository = new UsersRepository();

@@ -6,7 +6,7 @@ import { AppError } from '@core/errors/AppError';
 
 import { z as zod } from 'zod';
 
-import { makeCreateUserRefreshTokenUseCase } from '../containers/factories/make-user-create-refresh-token-use-case';
+import { makeCreateUserRefreshTokenUseCase } from '../../containers/factories/make-user-create-refresh-token-use-case';
 
 export async function createUserRefreshTokenController(
   request: FastifyRequest,

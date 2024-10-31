@@ -2,7 +2,7 @@ import { ILike, Not, Repository } from 'typeorm';
 
 import { postgresDataSource } from '@infra/database/typeorm/connections/postgres-connection';
 
-import { IUsersRepository } from '@domain/pet-guardian/application/repositories/users-repository';
+import { IUsersRepository } from '@domain/pet-guardian/application/repositories/v1/users-repository';
 import { ICreateUserDTO } from '@domain/pet-guardian/application/dtos/create-user-dto';
 import { User } from '@infra/database/typeorm/entities/User';
 import { IFindManyUsersResponseDTO } from '@domain/pet-guardian/application/dtos/find-many-users-response-dto';

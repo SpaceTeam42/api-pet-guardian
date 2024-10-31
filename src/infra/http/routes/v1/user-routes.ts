@@ -1,0 +1,16 @@
+import { FastifyInstance } from 'fastify';
+
+import { verifyJWT } from '@infra/http/middlewares/verify-jwt';
+
+import { createUserController } from '@infra/http/controllers/v1/create-user-controller';
+import { listUsersController } from '@infra/http/controllers/v1/list-all-users-controller';
+import { showUserController } from '@infra/http/controllers/v1/show-user-controller';
+import { meUserController } from '@infra/http/controllers/v1/me-user-controller';
+
+export async function userRoutes(app: FastifyInstance) {
+  app.post('/', createUserController);
+
+  app.get('/', { onRequest: [verifyJWT] }, listUsersController);
+  app.get('/show/:id', { onRequest: [verifyJWT] }, showUserController);
+  app.get('/me', { onRequest: [verifyJWT] }, meUserController);
+}

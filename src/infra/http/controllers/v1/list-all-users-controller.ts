@@ -4,7 +4,7 @@ import { container } from 'tsyringe';
 
 import { z as zod } from 'zod';
 
-import { ListUsersUseCase } from '@domain/pet-guardian/application/use-cases/list-users-use-case';
+import { ListUsersUseCase } from '@domain/pet-guardian/application/use-cases/v1/list-users-use-case';
 import { AppError } from '@core/errors/AppError';
 import { instanceToInstance } from 'class-transformer';
 

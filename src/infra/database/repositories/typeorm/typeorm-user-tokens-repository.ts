@@ -2,7 +2,7 @@ import { Repository } from 'typeorm';
 
 import { postgresDataSource } from '@infra/database/typeorm/connections/postgres-connection';
 
-import { IUserTokensRepository } from '@domain/pet-guardian/application/repositories/user-tokens-repository';
+import { IUserTokensRepository } from '@domain/pet-guardian/application/repositories/v1/user-tokens-repository';
 
 import { UserToken } from '@infra/database/typeorm/entities/UserToken';
 

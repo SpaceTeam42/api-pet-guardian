@@ -6,7 +6,7 @@ import { AppError } from '@core/errors/AppError';
 
 import { z as zod } from 'zod';
 
-import { makeAuthenticateUserUseCase } from '../containers/factories/make-user-authenticate-use-case';
+import { makeAuthenticateUserUseCase } from '../../containers/factories/make-user-authenticate-use-case';
 
 export async function authenticateUserController(
   request: FastifyRequest,

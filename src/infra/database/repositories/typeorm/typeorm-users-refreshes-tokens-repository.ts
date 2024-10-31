@@ -3,7 +3,7 @@ import { Repository } from 'typeorm';
 import { postgresDataSource } from '@infra/database/typeorm/connections/postgres-connection';
 
 import { ICreateUserRefreshTokenDTO } from '@domain/pet-guardian/application/dtos/create-user-refresh-token-dto';
-import { IUsersRefreshesTokensRepository } from '@domain/pet-guardian/application/repositories/users-refreshes-tokens-repository';
+import { IUsersRefreshesTokensRepository } from '@domain/pet-guardian/application/repositories/v1/users-refreshes-tokens-repository';
 import { UserRefreshToken } from '@infra/database/typeorm/entities/UserRefreshToken';
 
 class UsersRefreshesTokensRepository

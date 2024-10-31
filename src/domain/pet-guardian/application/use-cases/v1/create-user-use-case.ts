@@ -5,7 +5,7 @@ import { AppError } from '@core/errors/AppError';
 import { IHashGenerator } from '@domain/pet-guardian/application/cryptography/hash-generator';
 
 import { ICreateUserDTO } from '@domain/pet-guardian/application/dtos/create-user-dto';
-import { IUsersRepository } from '@domain/pet-guardian/application/repositories/users-repository';
+import { IUsersRepository } from '@domain/pet-guardian/application/repositories/v1/users-repository';
 
 import { User } from '@infra/database/typeorm/entities/User';
 

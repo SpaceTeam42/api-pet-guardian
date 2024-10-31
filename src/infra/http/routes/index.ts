@@ -1,14 +1,14 @@
 import { FastifyInstance } from 'fastify';
 
-import { userRoutes } from './user-routes';
-import { authenticateUserRoutes } from './authenticate-user-routes';
+import { userRoutes } from './v1/user-routes';
+import { authenticateUserRoutes } from './v1/authenticate-user-routes';
 
 export async function appRoutes(app: FastifyInstance) {
   app.register(userRoutes, {
-    prefix: '/users',
+    prefix: '/v1/users',
   });
 
   app.register(authenticateUserRoutes, {
-    prefix: '/authenticate_user',
+    prefix: '/v1/authenticate_user',
   });
 }

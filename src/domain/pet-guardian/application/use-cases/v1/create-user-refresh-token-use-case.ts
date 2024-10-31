@@ -8,8 +8,8 @@ import { env } from '@infra/env';
 
 import { AppError } from '@core/errors/AppError';
 
-import { IUsersRefreshesTokensRepository } from '../repositories/users-refreshes-tokens-repository';
-import { Encrypter } from '../cryptography/encrypter';
+import { IUsersRefreshesTokensRepository } from '../../repositories/v1/users-refreshes-tokens-repository';
+import { Encrypter } from '../../cryptography/encrypter';
 
 type IPayload = {
   sub: string;

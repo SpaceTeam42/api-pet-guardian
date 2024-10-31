@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 
-import { IUsersRepository } from '../repositories/users-repository';
+import { IUsersRepository } from '../../repositories/v1/users-repository';
 
 import { User } from '@infra/database/typeorm/entities/User';
 
