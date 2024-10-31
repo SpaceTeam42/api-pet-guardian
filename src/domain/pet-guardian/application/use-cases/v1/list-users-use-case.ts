@@ -4,18 +4,18 @@ import { IUsersRepository } from '../../repositories/v1/users-repository';
 
 import { User } from '@infra/database/typeorm/entities/User';
 
-type IRequest = {
+interface IRequest {
   authenticateUserId: string;
   enabled?: string | null;
   searchParam?: string | null;
   page?: string | null;
   perPage?: string | null;
-};
+}
 
-type IResponse = {
+interface IResponse {
   users: User[];
   totalUsers: number;
-};
+}
 
 enum ENABLED_PAGE_PER_PAGE_PARAM_DEFAULT {
   ENABLED = 'true',

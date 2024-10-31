@@ -9,9 +9,9 @@ import { IUsersRepository } from '@domain/pet-guardian/application/repositories/
 
 import { User } from '@infra/database/typeorm/entities/User';
 
-type IResponse = {
+interface IResponse {
   user: User;
-};
+}
 
 @injectable()
 export class CreateUserUseCase {

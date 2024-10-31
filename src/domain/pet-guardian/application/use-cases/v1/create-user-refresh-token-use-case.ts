@@ -11,18 +11,18 @@ import { AppError } from '@core/errors/AppError';
 import { IUsersRefreshesTokensRepository } from '../../repositories/v1/users-refreshes-tokens-repository';
 import { Encrypter } from '../../cryptography/encrypter';
 
-type IPayload = {
+interface IPayload {
   sub: string;
-};
+}
 
-type IRequest = {
+interface IRequest {
   refreshToken: string;
-};
+}
 
-type IResponse = {
+interface IResponse {
   token: string;
   refresh_token: string;
-};
+}
 
 export class CreateUserRefreshTokenUseCase {
   constructor(

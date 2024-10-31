@@ -12,16 +12,16 @@ import { IUsersRefreshesTokensRepository } from '@domain/pet-guardian/applicatio
 
 import { User } from '@infra/database/typeorm/entities/User';
 
-type IRequest = {
+interface IRequest {
   email: string;
   password: string;
-};
+}
 
-type IResponse = {
+interface IResponse {
   user: User;
   token: string;
   refresh_token: string;
-};
+}
 
 export class AuthenticateUserUseCase {
   constructor(
