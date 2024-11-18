@@ -6,25 +6,25 @@ import { AppError } from '@core/errors/AppError';
 
 import { z as zod } from 'zod';
 
-import { makeCreateUserRefreshTokenUseCase } from '../../containers/factories/make-user-create-refresh-token-use-case';
+import { makeCreateTutorRefreshTokenUseCase } from '@infra/http/containers/factories/make-tutor-create-refresh-token-use-case';
 
-export async function createUserRefreshTokenController(
+export async function createTutorRefreshTokenController(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
-  const createUserRefreshTokenBodySchema = zod.object({
+  const createTutorRefreshTokenBodySchema = zod.object({
     refresh_token: zod.string(),
   });
 
   const { refresh_token: refreshToken } =
-    createUserRefreshTokenBodySchema.parse(request.body);
+    createTutorRefreshTokenBodySchema.parse(request.body);
 
   try {
-    const createUserRefreshTokenUseCase =
-      makeCreateUserRefreshTokenUseCase(reply);
+    const createRefreshTokenTutorUseCase =
+      makeCreateTutorRefreshTokenUseCase(reply);
 
     const { token, refresh_token } =
-      await createUserRefreshTokenUseCase.execute({
+      await createRefreshTokenTutorUseCase.execute({
         refreshToken,
       });
 

@@ -11,10 +11,10 @@ export function makeCreateUserRefreshTokenUseCase(reply: FastifyReply) {
 
   const encrypter = new JwtEncrypter(reply);
 
-  const authenticateUseUseCase = new CreateUserRefreshTokenUseCase(
+  const createUserRefreshTokenUseUseCase = new CreateUserRefreshTokenUseCase(
     encrypter,
     usersRefreshesTokensRepository,
   );
 
-  return authenticateUseUseCase;
+  return createUserRefreshTokenUseUseCase;
 }

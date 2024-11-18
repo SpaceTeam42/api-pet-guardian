@@ -7,10 +7,10 @@ import authConfig from '@config/auth';
 import { IHashComparer } from '@domain/pet-guardian/application/cryptography/hash-comparer';
 import { Encrypter } from '@domain/pet-guardian/application/cryptography/encrypter';
 
-import { IUsersRepository } from '@domain/pet-guardian/application/repositories/v1/users-repository';
-import { IUsersRefreshesTokensRepository } from '@domain/pet-guardian/application/repositories/v1/users-refreshes-tokens-repository';
+import { ITutorsRepository } from '../../repositories/v1/tutors-repository';
+import { ITutorsRefreshesTokensRepository } from '../../repositories/v1/tutors-refreshes-tokens-repository';
 
-import { User } from '@infra/database/typeorm/entities/User';
+import { Tutor } from '@infra/database/typeorm/entities/Tutor';
 
 interface IRequest {
   email: string;
@@ -18,16 +18,16 @@ interface IRequest {
 }
 
 interface IResponse {
-  user: User;
+  tutor: Tutor;
   token: string;
   refresh_token: string;
 }
 
-export class AuthenticateUserUseCase {
+export class AuthenticateTutorUseCase {
   constructor(
-    private usersRepository: IUsersRepository,
+    private tutorsRepository: ITutorsRepository,
 
-    private userRefreshTokensRepository: IUsersRefreshesTokensRepository,
+    private tutorRefreshTokensRepository: ITutorsRefreshesTokensRepository,
 
     private hashComparer: IHashComparer,
 
@@ -35,15 +35,15 @@ export class AuthenticateUserUseCase {
   ) {}
 
   async execute({ email, password }: IRequest): Promise<IResponse> {
-    const user = await this.usersRepository.findByEmail(email);
+    const tutor = await this.tutorsRepository.findByEmail(email);
 
-    if (!user || user.enabled === false) {
+    if (!tutor || tutor.enabled === false) {
       throw new AppError('E-mail or password incorrect!', 400);
     }
 
     const passwordMatch = await this.hashComparer.compare(
       password,
-      user.password,
+      tutor.password,
     );
 
     if (!passwordMatch) {
@@ -51,12 +51,12 @@ export class AuthenticateUserUseCase {
     }
 
     const token = await this.encrypter.encrypt(
-      user.id,
+      tutor.id,
       authConfig.jwt.expires_in_token,
     );
 
     const refreshToken = await this.encrypter.encrypt(
-      user.id,
+      tutor.id,
       authConfig.jwt.expires_in_refresh_token,
     );
 
@@ -65,12 +65,12 @@ export class AuthenticateUserUseCase {
       authConfig.jwt.expires_refresh_token_days,
     );
 
-    await this.userRefreshTokensRepository.create({
+    await this.tutorRefreshTokensRepository.create({
       refresh_token: refreshToken,
-      user_id: user.id,
+      tutor_id: tutor.id,
       expires_date: refreshTokenExpiresDate,
     });
 
-    return { user, token, refresh_token: refreshToken };
+    return { tutor, token, refresh_token: refreshToken };
   }
 }

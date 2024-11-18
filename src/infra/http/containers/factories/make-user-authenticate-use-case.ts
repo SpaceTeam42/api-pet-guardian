@@ -14,12 +14,12 @@ export function makeAuthenticateUserUseCase(reply: FastifyReply) {
   const hashComparer = new BcrypterHasher();
   const encrypter = new JwtEncrypter(reply);
 
-  const authenticateUseUseCase = new AuthenticateUserUseCase(
+  const authenticateUserUseCase = new AuthenticateUserUseCase(
     usersRepository,
     usersRefreshesTokensRepository,
     hashComparer,
     encrypter,
   );
 
-  return authenticateUseUseCase;
+  return authenticateUserUseCase;
 }
