@@ -66,7 +66,7 @@ export async function createTutorController(
     enabled,
   } = createTutorBodySchema.parse(request.body);
 
-  const avatarImage = request.file.filename;
+  const avatarImage = request.file.fieldname;
 
   try {
     const createTutorUseCase = container.resolve(CreateTutorUseCase);

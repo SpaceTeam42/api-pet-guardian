@@ -37,7 +37,7 @@ class Tutor {
   password: string;
 
   @Column('varchar')
-  type: TutorTypeEnum;
+  type: keyof typeof TutorTypeEnum;
 
   @Column('varchar')
   cnpj_cpf: string;
