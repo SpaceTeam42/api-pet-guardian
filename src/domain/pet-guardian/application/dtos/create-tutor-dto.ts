@@ -4,7 +4,7 @@ export type ICreateTutorDTO = {
   name: string;
   email: string;
   password: string;
-  type: TutorTypeEnum;
+  type: keyof typeof TutorTypeEnum;
   cnpj_cpf: string;
   manager_ong?: string;
   avatar?: string;

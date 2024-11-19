@@ -1,6 +1,6 @@
 import { container } from 'tsyringe';
 
-import './providers/cryptography';
+import './providers';
 
 // USERS
 import { IUsersRepository } from '@domain/pet-guardian/application/repositories/v1/users-repository';
