@@ -7,7 +7,6 @@ export type ICreateTutorDTO = {
   type: keyof typeof TutorTypeEnum;
   cnpj_cpf: string;
   manager_ong?: string;
-  avatar?: string;
   personal_phone: string;
   personal_phone_is_whatsapp: boolean;
   public_phone?: string;

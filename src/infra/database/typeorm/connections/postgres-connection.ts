@@ -11,7 +11,7 @@ const postgresDataSource = new DataSource({
   database: env.DATABASE_NAME,
   // schema: 'public',
   entities: ['./src/infra/database/typeorm/entities/*.ts'],
-  migrations: ['../migrations/*.ts'],
+  migrations: ['./src/infra/database/typeorm/migrations/*.ts'],
   // migrations: ['./src/infra/database/typeorm/migrations/*.ts'],
 });
 

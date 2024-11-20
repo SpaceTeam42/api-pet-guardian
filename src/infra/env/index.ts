@@ -18,6 +18,7 @@ const envSchema = zod.object({
   PORT: zod.coerce.number().default(3333),
   JWT_PRIVATE_KEY: zod.string(),
   JWT_PUBLIC_KEY: zod.string(),
+  STORAGE_DRIVER: zod.enum(['disk', 's3']).default('disk'),
 });
 
 const _env = envSchema.safeParse(process.env);

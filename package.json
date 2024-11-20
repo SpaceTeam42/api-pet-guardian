@@ -7,7 +7,12 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsnd --files -r tsconfig-paths/register src/infra/http/server.ts",
     "start": "node build/server.js",
-    "build": "tsup src --out-dir build"
+    "build": "tsup src --out-dir build",
+    "typeorm": "tsnd -r tsconfig-paths/register node_modules/.bin/typeorm",
+    "migration:revert": "tsnd -r tsconfig-paths/register node_modules/.bin/typeorm migration:revert -d src/infra/database/typeorm/connections/postgres-connection",
+    "migration:run": "tsnd -r tsconfig-paths/register node_modules/.bin/typeorm migration:run -d src/infra/database/typeorm/connections/postgres-connection",
+    "migration:generate": "tsnd -r tsconfig-paths/register node_modules/.bin/typeorm migration:generate -d src/infra/database/typeorm/connections/postgres-connection",
+    "migration:create": "tsnd -r tsconfig-paths/register node_modules/.bin/typeorm migration:create"
   },
   "keywords": [],
   "author": "",

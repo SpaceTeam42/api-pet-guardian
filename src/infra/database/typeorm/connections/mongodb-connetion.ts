@@ -8,7 +8,7 @@ const mongoDataSource = new DataSource({
   port: env.MONGO_PORT,
   database: env.DATABASE_NAME,
   useUnifiedTopology: true,
-  entities: ['../schemas/*.ts'],
+  entities: ['./src/infra/database/typeorm/schemas/*.ts'],
 });
 
 mongoDataSource

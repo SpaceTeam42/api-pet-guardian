@@ -1,7 +1,5 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 
-import { File } from 'fastify-multer/lib/interfaces';
-
 import { container } from 'tsyringe';
 
 import { z as zod } from 'zod';
@@ -11,12 +9,6 @@ import { instanceToInstance } from 'class-transformer';
 import { AppError } from '@core/errors/AppError';
 
 import { CreateTutorUseCase } from '@domain/pet-guardian/application/use-cases/v1/create-tutor-use-case';
-
-declare module 'fastify' {
-  export interface FastifyRequest {
-    file: File;
-  }
-}
 
 export async function createTutorController(
   request: FastifyRequest,
@@ -32,7 +24,7 @@ export async function createTutorController(
     personal_phone: zod.string(),
     personal_phone_is_whatsapp: zod.boolean(),
     public_phone: zod.string().optional().nullable(),
-    public_phone_is_whatsapp: zod.boolean().default(false),
+    public_phone_is_whatsapp: zod.boolean(),
     street_name: zod.string(),
     street_number: zod.string(),
     complement: zod.string().optional().nullable(),
@@ -41,7 +33,6 @@ export async function createTutorController(
     reference: zod.string().optional().nullable(),
     state: zod.string(),
     city: zod.string(),
-    enabled: zod.boolean(),
   });
 
   const {
@@ -63,10 +54,7 @@ export async function createTutorController(
     reference,
     state,
     city,
-    enabled,
   } = createTutorBodySchema.parse(request.body);
-
-  const avatarImage = request.file.fieldname;
 
   try {
     const createTutorUseCase = container.resolve(CreateTutorUseCase);
@@ -78,7 +66,6 @@ export async function createTutorController(
       type,
       cnpj_cpf,
       manager_ong,
-      avatar: avatarImage,
       personal_phone,
       personal_phone_is_whatsapp,
       public_phone,
@@ -91,7 +78,6 @@ export async function createTutorController(
       reference,
       state,
       city,
-      enabled,
     });
 
     return reply.status(201).send(instanceToInstance({ tutor }));

@@ -1,12 +1,8 @@
 import { inject } from 'tsyringe';
 
-import uploadConfig from '@config/upload';
-
 import { AppError } from '@core/errors/AppError';
 
 import { IHashGenerator } from '../../cryptography/hash-generator';
-
-import { IStorage } from '../../storage/storage';
 
 import { ITutorsRepository } from '../../repositories/v1/tutors-repository';
 import { Tutor, TutorTypeEnum } from '@infra/database/typeorm/entities/Tutor';
@@ -18,12 +14,10 @@ interface IRequest {
   type: keyof typeof TutorTypeEnum;
   cnpj_cpf: string;
   manager_ong?: string;
-  avatar?: string;
   personal_phone: string;
   personal_phone_is_whatsapp: boolean;
   public_phone?: string;
   public_phone_is_whatsapp?: boolean;
-  enabled: boolean;
   street_name: string;
   street_number: string;
   complement?: string;
@@ -45,9 +39,6 @@ export class CreateTutorUseCase {
 
     @inject('HashGeneratorProvider')
     private hashGenerator: IHashGenerator,
-
-    @inject('StorageProvider')
-    private storageProvider: IStorage,
   ) {}
 
   async execute({
@@ -57,12 +48,10 @@ export class CreateTutorUseCase {
     type,
     cnpj_cpf,
     manager_ong,
-    avatar,
     personal_phone,
     personal_phone_is_whatsapp,
     public_phone,
     public_phone_is_whatsapp,
-    enabled = true,
     street_name,
     street_number,
     complement,
@@ -73,10 +62,12 @@ export class CreateTutorUseCase {
     city,
   }: IRequest): Promise<IResponse> {
     const tutorExistsWithEmail = await this.tutorsRepository.findByEmail(email);
+    console.log(
+      '🚀 ~ CreateTutorUseCase ~ tutorExistsWithEmail:',
+      tutorExistsWithEmail,
+    );
 
     if (tutorExistsWithEmail) {
-      await this.storageProvider.delete(avatar, uploadConfig.tmpFolder);
-
       throw new AppError('E-mail already in use!', 400);
     }
 
@@ -84,30 +75,14 @@ export class CreateTutorUseCase {
       await this.tutorsRepository.findByCnpjCpf(cnpj_cpf);
 
     if (tutorExistsWithCnpjCpf) {
-      if (avatar) {
-        await this.storageProvider.delete(avatar);
-      }
-
       throw new AppError('CNPJ/CPF already in use!', 400);
     }
 
     if (Tutor.getTutorTypeEnum(type) === '') {
-      if (avatar) {
-        await this.storageProvider.delete(avatar);
-      }
-
       throw new AppError('Perfil invalid!', 400);
     }
 
     const passwordHash = await this.hashGenerator.hash(password);
-
-    let avatarImage = null;
-    if (avatar) {
-      avatarImage = await this.storageProvider.save(
-        avatar,
-        uploadConfig.tutorsFolder,
-      );
-    }
 
     const tutor = await this.tutorsRepository.create({
       name,
@@ -116,12 +91,11 @@ export class CreateTutorUseCase {
       type,
       cnpj_cpf,
       manager_ong,
-      avatar: avatarImage,
       personal_phone,
       personal_phone_is_whatsapp,
       public_phone,
       public_phone_is_whatsapp,
-      enabled,
+      enabled: true,
       street_name,
       street_number,
       complement,

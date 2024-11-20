@@ -26,13 +26,13 @@ import { appRoutes } from './routes';
 
 export const app = fastify();
 
+// MULTER
+app.register(multer.contentParser);
+
 // CORS
 app.register(cors, {
   exposedHeaders: ['x-total-count-registers'],
 });
-
-// MULTER
-app.register(multer.contentParser);
 
 // ROUTES
 app.register(appRoutes);

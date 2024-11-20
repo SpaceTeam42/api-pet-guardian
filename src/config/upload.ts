@@ -1,6 +1,8 @@
 import crypto from 'crypto';
 import path from 'path';
 
+import { env } from '@infra/env';
+
 import multer from 'fastify-multer';
 
 const tmpFolder = path.resolve(__dirname, '..', '..', 'tmp');
@@ -22,7 +24,7 @@ interface IUploadConfig {
 }
 
 export default {
-  driver: process.env.STORAGE_DRIVER,
+  driver: env.STORAGE_DRIVER,
 
   tmpFolder,
   usersFolder: 'users_img',
