@@ -1,4 +1,4 @@
-import { inject } from 'tsyringe';
+import { inject, injectable } from 'tsyringe';
 
 import { AppError } from '@core/errors/AppError';
 
@@ -31,7 +31,7 @@ interface IRequest {
 interface IResponse {
   tutor: Tutor;
 }
-
+@injectable()
 export class CreateTutorUseCase {
   constructor(
     @inject('TutorsRepository')
@@ -62,10 +62,6 @@ export class CreateTutorUseCase {
     city,
   }: IRequest): Promise<IResponse> {
     const tutorExistsWithEmail = await this.tutorsRepository.findByEmail(email);
-    console.log(
-      '🚀 ~ CreateTutorUseCase ~ tutorExistsWithEmail:',
-      tutorExistsWithEmail,
-    );
 
     if (tutorExistsWithEmail) {
       throw new AppError('E-mail already in use!', 400);

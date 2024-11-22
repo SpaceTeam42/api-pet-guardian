@@ -12,7 +12,6 @@ export interface ITutorsRepository {
     type,
     cnpj_cpf,
     manager_ong,
-    avatar,
     personal_phone,
     personal_phone_is_whatsapp,
     public_phone,
@@ -29,8 +28,7 @@ export interface ITutorsRepository {
   }: ICreateTutorDTO): Promise<Tutor>;
   findByEmail(email: string): Promise<Tutor | null>;
   findByCnpjCpf(cnpj_cpf: string): Promise<Tutor | null>;
-  findAll({
-    authenticateTutorId,
+  findMany({
     searchAndPageParams: { searchParam, page, perPage },
     enabled,
   }: IFindManyTutorsParametersDTO): Promise<IFindManyTutorsResponseDTO>;

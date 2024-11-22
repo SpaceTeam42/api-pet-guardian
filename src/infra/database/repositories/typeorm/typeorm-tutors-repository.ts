@@ -1,4 +1,4 @@
-import { ILike, Not, Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 
 import { postgresDataSource } from '@infra/database/typeorm/connections/postgres-connection';
 
@@ -78,8 +78,7 @@ export class TutorsRepository implements ITutorsRepository {
     return this.ormRepository.findOne({ where: { id } });
   }
 
-  async findAll({
-    authenticateTutorId,
+  async findMany({
     searchAndPageParams: { searchParam, page, perPage },
     enabled,
   }: IFindManyTutorsParametersDTO): Promise<IFindManyTutorsResponseDTO> {
@@ -93,12 +92,12 @@ export class TutorsRepository implements ITutorsRepository {
       const countUsers = await this.ormRepository.count({
         where: [
           {
-            id: Not(authenticateTutorId),
+            // id: Not(authenticateTutorId),
             name: ILike(`%${searchParam}%`),
             enabled: enabled === 'true',
           },
           {
-            id: Not(authenticateTutorId),
+            // id: Not(authenticateTutorId),
             cnpj_cpf: ILike(`%${searchParam}%`),
             enabled: enabled === 'true',
           },
@@ -111,12 +110,12 @@ export class TutorsRepository implements ITutorsRepository {
         const tutorsFind = await this.ormRepository.find({
           where: [
             {
-              id: Not(authenticateTutorId),
+              // id: Not(authenticateTutorId),
               name: ILike(`%${searchParam}%`),
               enabled: enabled === 'true',
             },
             {
-              id: Not(authenticateTutorId),
+              // id: Not(authenticateTutorId),
               cnpj_cpf: ILike(`%${searchParam}%`),
               enabled: enabled === 'true',
             },
@@ -135,12 +134,12 @@ export class TutorsRepository implements ITutorsRepository {
         const tutorsFind = await this.ormRepository.find({
           where: [
             {
-              id: Not(authenticateTutorId),
+              // id: Not(authenticateTutorId),
               name: ILike(`%${searchParam}%`),
               enabled: enabled === 'true',
             },
             {
-              id: Not(authenticateTutorId),
+              // id: Not(authenticateTutorId),
               cnpj_cpf: ILike(`%${searchParam}%`),
               enabled: enabled === 'true',
             },
@@ -155,7 +154,7 @@ export class TutorsRepository implements ITutorsRepository {
     } else {
       const countUsers = await this.ormRepository.count({
         where: {
-          id: Not(authenticateTutorId),
+          // id: Not(authenticateTutorId),
           enabled: enabled === 'true',
         },
       });
@@ -165,7 +164,7 @@ export class TutorsRepository implements ITutorsRepository {
       if (page) {
         const tutorsFind = await this.ormRepository.find({
           where: {
-            id: Not(authenticateTutorId),
+            // id: Not(authenticateTutorId),
             enabled: enabled === 'true',
           },
           // quantos itens queremos pular
@@ -181,7 +180,7 @@ export class TutorsRepository implements ITutorsRepository {
       } else {
         const tutorsFind = await this.ormRepository.find({
           where: {
-            id: Not(authenticateTutorId),
+            // id: Not(authenticateTutorId),
             enabled: enabled === 'true',
           },
 
