@@ -10,6 +10,8 @@ import { createTutorController } from '@infra/http/controllers/v1/create-tutor-c
 import { updateAvatarTutorController } from '@infra/http/controllers/v1/update-avatar-tutor-controller';
 import { updateTutorController } from '@infra/http/controllers/v1/update-tutor-controller';
 import { listTutorsController } from '@infra/http/controllers/v1/list-tutors-controller';
+import { meTutorController } from '@infra/http/controllers/v1/me-tutor-controller';
+import { showTutorController } from '@infra/http/controllers/v1/show-tutor-controller';
 
 export async function tutorRoutes(app: FastifyInstance) {
   const upload = multer();
@@ -21,6 +23,10 @@ export async function tutorRoutes(app: FastifyInstance) {
     { onRequest: [verifyJWT, ensuredUserAuthenticated] },
     listTutorsController,
   );
+
+  app.get('/me', { onRequest: verifyJWT }, meTutorController);
+
+  app.get('/show/:id', showTutorController);
 
   app.patch(
     '/update/avatar',
@@ -34,6 +40,12 @@ export async function tutorRoutes(app: FastifyInstance) {
   app.put(
     '/',
     { onRequest: [verifyJWT, ensuredTutorAuthenticated] },
+    updateTutorController,
+  );
+
+  app.put(
+    '/update/byUser',
+    { onRequest: [verifyJWT, ensuredUserAuthenticated] },
     updateTutorController,
   );
 }

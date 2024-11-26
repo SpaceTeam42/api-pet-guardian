@@ -2,10 +2,13 @@ import { FastifyReply, FastifyRequest } from 'fastify';
 
 import { container } from 'tsyringe';
 
+import { instanceToInstance } from 'class-transformer';
+
 import { z as zod } from 'zod';
 
+import { AppError } from '@core/errors/AppError';
+
 import { ListTutorsUseCase } from '@domain/pet-guardian/application/use-cases/v1/list-tutors-use-case';
-import { instanceToInstance } from 'class-transformer';
 
 export async function listTutorsController(
   request: FastifyRequest,
@@ -35,5 +38,12 @@ export async function listTutorsController(
       .status(200)
       .header('x-total-count-register', totalTutors.toString())
       .send(instanceToInstance({ tutors }));
-  } catch (error) {}
+  } catch (error) {
+    if (error instanceof AppError) {
+      return reply.status(error.statusCode).send({
+        status: 'error',
+        message: error.message,
+      });
+    }
+  }
 }
