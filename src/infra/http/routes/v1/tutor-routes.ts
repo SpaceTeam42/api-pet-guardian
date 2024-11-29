@@ -1,5 +1,7 @@
 import { FastifyInstance } from 'fastify';
 
+import uploadConfig from '@config/upload';
+
 import multer from 'fastify-multer';
 
 import { verifyJWT } from '@infra/http/middlewares/verify-jwt';
@@ -14,7 +16,7 @@ import { meTutorController } from '@infra/http/controllers/v1/me-tutor-controlle
 import { showTutorController } from '@infra/http/controllers/v1/show-tutor-controller';
 
 export async function tutorRoutes(app: FastifyInstance) {
-  const upload = multer();
+  const upload = multer(uploadConfig.multer.storage);
 
   app.post('/', createTutorController);
 
