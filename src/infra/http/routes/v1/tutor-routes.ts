@@ -9,11 +9,15 @@ import { ensuredUserAuthenticated } from '@infra/http/middlewares/ensured-user-a
 import { ensuredTutorAuthenticated } from '@infra/http/middlewares/ensured-tutor-authenticated';
 
 import { createTutorController } from '@infra/http/controllers/v1/create-tutor-controller';
+
 import { updateAvatarTutorController } from '@infra/http/controllers/v1/update-avatar-tutor-controller';
 import { updateTutorController } from '@infra/http/controllers/v1/update-tutor-controller';
+
 import { listTutorsController } from '@infra/http/controllers/v1/list-tutors-controller';
 import { meTutorController } from '@infra/http/controllers/v1/me-tutor-controller';
 import { showTutorController } from '@infra/http/controllers/v1/show-tutor-controller';
+
+import { deleteTutorController } from '@infra/http/controllers/v1/delete-tutor-controller';
 
 export async function tutorRoutes(app: FastifyInstance) {
   const upload = multer(uploadConfig.multer.storage);
@@ -49,5 +53,11 @@ export async function tutorRoutes(app: FastifyInstance) {
     '/update/byUser',
     { onRequest: [verifyJWT, ensuredUserAuthenticated] },
     updateTutorController,
+  );
+
+  app.delete(
+    '/',
+    { onRequest: [verifyJWT, ensuredTutorAuthenticated] },
+    deleteTutorController,
   );
 }
