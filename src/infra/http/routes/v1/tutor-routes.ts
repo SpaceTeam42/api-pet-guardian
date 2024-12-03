@@ -20,7 +20,9 @@ import { showTutorController } from '@infra/http/controllers/v1/show-tutor-contr
 import { deleteTutorController } from '@infra/http/controllers/v1/delete-tutor-controller';
 
 export async function tutorRoutes(app: FastifyInstance) {
-  const upload = multer(uploadConfig.multer.storage);
+  const { storage } = uploadConfig.multer;
+
+  const upload = multer({ storage });
 
   app.post('/', createTutorController);
 

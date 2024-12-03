@@ -1,5 +1,5 @@
-import crypto from 'crypto';
-import path from 'path';
+import crypto from 'node:crypto';
+import path from 'node:path';
 
 import { env } from '@infra/env';
 
@@ -19,7 +19,7 @@ interface IUploadConfig {
   newsFolder: string;
 
   multer: {
-    storage: NonNullable<unknown>;
+    storage: any;
   };
 }
 
