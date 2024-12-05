@@ -89,7 +89,7 @@ export class TutorsRepository implements ITutorsRepository {
     // LIKE - case-sensitive
 
     if (searchParam) {
-      const countUsers = await this.ormRepository.count({
+      const countTutors = await this.ormRepository.count({
         where: [
           {
             // id: Not(authenticateTutorId),
@@ -104,7 +104,7 @@ export class TutorsRepository implements ITutorsRepository {
         ],
       });
 
-      totalTutors = countUsers;
+      totalTutors = countTutors;
 
       if (page) {
         const tutorsFind = await this.ormRepository.find({
@@ -152,14 +152,14 @@ export class TutorsRepository implements ITutorsRepository {
         tutors = tutorsFind;
       }
     } else {
-      const countUsers = await this.ormRepository.count({
+      const countTutors = await this.ormRepository.count({
         where: {
           // id: Not(authenticateTutorId),
           enabled: enabled === 'true',
         },
       });
 
-      totalTutors = countUsers;
+      totalTutors = countTutors;
 
       if (page) {
         const tutorsFind = await this.ormRepository.find({
