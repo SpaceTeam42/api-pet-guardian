@@ -24,6 +24,10 @@ export async function tutorRoutes(app: FastifyInstance) {
 
   const upload = multer({ storage });
 
+  app.addContentTypeParser('*', (req, a, done) => {
+    done(null);
+  });
+
   app.post('/', createTutorController);
 
   app.get(
