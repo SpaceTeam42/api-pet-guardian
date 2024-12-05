@@ -1,6 +1,10 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 
-import { File } from 'fastify-multer/lib/interfaces';
+import { pipeline } from 'node:stream/promises';
+
+import uploadConfig from '@config/upload';
+
+// import { File } from 'fastify-multer/lib/interfaces';
 
 import { container } from 'tsyringe';
 
@@ -10,11 +14,11 @@ import { AppError } from '@core/errors/AppError';
 
 import { UpdateAvatarTutorUseCase } from '@domain/pet-guardian/application/use-cases/v1/update-avatar-tutor-use-case';
 
-declare module 'fastify' {
-  interface FastifyRequest {
-    file: File;
-  }
-}
+// declare module 'fastify' {
+//   interface FastifyRequest {
+//     file: File;
+//   }
+// }
 
 export async function updateAvatarTutorController(
   request: FastifyRequest,
@@ -22,7 +26,15 @@ export async function updateAvatarTutorController(
 ) {
   try {
     const { sub } = request.user;
-    const avatarFilename = request.file.filename;
+
+    // const avatarFilename = request.file.filename;
+
+    const fileData = await request.file();
+
+    const { createWriteStream, fileNameFormatted } =
+      uploadConfig.createFileUpload(fileData.filename);
+
+    await pipeline(fileData.file, createWriteStream);
 
     const tutorId = sub;
 
@@ -32,7 +44,7 @@ export async function updateAvatarTutorController(
 
     const { tutor } = await updateAvatarTutorUseCase.execute({
       id: tutorId,
-      avatarFilename,
+      avatarFilename: fileNameFormatted,
     });
 
     return reply.status(200).send(instanceToInstance({ tutor }));
@@ -43,5 +55,7 @@ export async function updateAvatarTutorController(
         message: error.message,
       });
     }
+
+    throw error;
   }
 }

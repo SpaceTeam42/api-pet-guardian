@@ -1,8 +1,8 @@
 import { FastifyInstance } from 'fastify';
 
-import uploadConfig from '@config/upload';
+// import uploadConfig from '@config/upload';
 
-import multer from 'fastify-multer';
+// import multer from 'fastify-multer';
 
 import { verifyJWT } from '@infra/http/middlewares/verify-jwt';
 import { ensuredUserAuthenticated } from '@infra/http/middlewares/ensured-user-authenticated';
@@ -20,13 +20,13 @@ import { showTutorController } from '@infra/http/controllers/v1/show-tutor-contr
 import { deleteTutorController } from '@infra/http/controllers/v1/delete-tutor-controller';
 
 export async function tutorRoutes(app: FastifyInstance) {
-  const { storage } = uploadConfig.multer;
+  // const { storage } = uploadConfig.multer;
 
-  const upload = multer({ storage });
+  // const upload = multer({ storage });
 
-  app.addContentTypeParser('*', (req, a, done) => {
-    done(null);
-  });
+  // app.addContentTypeParser('*', (req, a, done) => {
+  //   done(null);
+  // });
 
   app.post('/', createTutorController);
 
@@ -44,7 +44,7 @@ export async function tutorRoutes(app: FastifyInstance) {
     '/update/avatar',
     {
       onRequest: [verifyJWT, ensuredTutorAuthenticated],
-      preHandler: upload.single('avatar'),
+      // preHandler: upload.single('avatar'),
     },
     updateAvatarTutorController,
   );

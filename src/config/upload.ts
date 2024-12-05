@@ -3,9 +3,16 @@ import path from 'node:path';
 
 import { env } from '@infra/env';
 
-import multer from 'fastify-multer';
+import fs from 'node:fs';
+
+// import multer from 'fastify-multer';
 
 const tmpFolder = path.resolve(__dirname, '..', '..', 'tmp');
+
+interface ICreateFileUpload {
+  createWriteStream: fs.WriteStream;
+  fileNameFormatted: string;
+}
 
 interface IUploadConfig {
   driver: 'disk' | 's3';
@@ -18,9 +25,11 @@ interface IUploadConfig {
   writersFolder: string;
   newsFolder: string;
 
-  multer: {
-    storage: any;
-  };
+  createFileUpload: (fileName: string) => ICreateFileUpload;
+
+  // multer: {
+  //   storage: any;
+  // };
 }
 
 export default {
@@ -34,15 +43,30 @@ export default {
   writersFolder: 'writers_img',
   newsFolder: 'news_img',
 
-  multer: {
-    storage: multer.diskStorage({
-      destination: tmpFolder,
-      filename(request, file, callback) {
-        const fileHash = crypto.randomBytes(10).toString('hex');
-        const fileName = `${fileHash}-${file.originalname}`.replace(/\s/g, '');
+  createFileUpload: (fileName) => {
+    const fileHash = crypto.randomBytes(10).toString('hex');
 
-        return callback(null, fileName);
-      },
-    }),
+    const fileNameFormatted = `${fileHash}-${fileName}`.replace(/\s/g, '');
+
+    const createWriteStream = fs.createWriteStream(
+      `${tmpFolder}/${fileNameFormatted}`,
+    );
+
+    return {
+      createWriteStream,
+      fileNameFormatted,
+    };
   },
+
+  // multer: {
+  //   storage: multer.diskStorage({
+  //     destination: tmpFolder,
+  //     filename(request, file, callback) {
+  //       const fileHash = crypto.randomBytes(10).toString('hex');
+  //       const fileName = `${fileHash}-${file.originalname}`.replace(/\s/g, '');
+
+  //       return callback(null, fileName);
+  //     },
+  //   }),
+  // },
 } as IUploadConfig;

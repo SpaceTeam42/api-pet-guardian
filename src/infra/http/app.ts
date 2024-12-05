@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 
-import multer from 'fastify-multer';
+import fastifyMultipart from '@fastify/multipart';
 
 import cors from '@fastify/cors';
 
@@ -27,7 +27,7 @@ import { appRoutes } from './routes';
 export const app = fastify();
 
 // MULTER
-app.register(multer.contentParser);
+app.register(fastifyMultipart);
 
 // CORS
 app.register(cors, {
