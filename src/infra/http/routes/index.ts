@@ -6,6 +6,8 @@ import { authenticateUserRoutes } from './v1/authenticate-user-routes';
 import { tutorRoutes } from './v1/tutor-routes';
 import { authenticateTutorRoutes } from './v1/authenticate-tutor-routes';
 
+import { categoryRoutes } from './v1/category-routes';
+
 export async function appRoutes(app: FastifyInstance) {
   // SECTION - USERS
 
@@ -25,5 +27,11 @@ export async function appRoutes(app: FastifyInstance) {
 
   app.register(authenticateTutorRoutes, {
     prefix: '/v1/authenticate_tutor',
+  });
+
+  // SECTION - CATEGORIES
+
+  app.register(categoryRoutes, {
+    prefix: '/v1/categories',
   });
 }

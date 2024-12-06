@@ -2,19 +2,19 @@ import { FastifyReply, FastifyRequest } from 'fastify';
 
 import { container } from 'tsyringe';
 
-import { instanceToInstance } from 'class-transformer';
-
 import { z as zod } from 'zod';
+
+import { instanceToInstance } from 'class-transformer';
 
 import { AppError } from '@core/errors/AppError';
 
-import { ListTutorsUseCase } from '@domain/pet-guardian/application/use-cases/v1/list-tutors-use-case';
+import { ListCategoriesUseCase } from '@domain/pet-guardian/application/use-cases/v1/list-categories-use-case';
 
-export async function listTutorsController(
+export async function listCategoriesController(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
-  const listTutorsQueryParamsSchema = zod.object({
+  const listCategoriesQueryParamsSchema = zod.object({
     searchParam: zod.string().optional().nullable(),
     page: zod.string().optional().nullable(),
     perPage: zod.string().optional().nullable(),
@@ -22,22 +22,24 @@ export async function listTutorsController(
   });
 
   const { searchParam, page, perPage, enabled } =
-    listTutorsQueryParamsSchema.parse(request.query);
+    listCategoriesQueryParamsSchema.parse(request.query);
 
   try {
-    const listTutorsUseCase = container.resolve(ListTutorsUseCase);
+    const listCategoriesUseCase = container.resolve(ListCategoriesUseCase);
 
-    const { tutors, totalTutors } = await listTutorsUseCase.execute({
-      searchParam,
-      page,
-      perPage,
-      enabled,
-    });
+    const { categories, totalCategories } = await listCategoriesUseCase.execute(
+      {
+        searchParam,
+        page,
+        perPage,
+        enabled,
+      },
+    );
 
     return reply
+      .header('x-total-count-register', totalCategories)
       .status(200)
-      .header('x-total-count-register', totalTutors)
-      .send(instanceToInstance({ tutors }));
+      .send(instanceToInstance({ categories }));
   } catch (error) {
     if (error instanceof AppError) {
       return reply.status(error.statusCode).send({

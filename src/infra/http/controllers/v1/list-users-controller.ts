@@ -15,9 +15,9 @@ export async function listUsersController(
   const userId = request.user.sub;
 
   const listAllUsersQueryParamsSchema = zod.object({
-    searchParam: zod.string().optional(),
+    searchParam: zod.string().optional().nullable(),
     page: zod.string().optional().nullable(),
-    perPage: zod.string().optional(),
+    perPage: zod.string().optional().nullable(),
     enabled: zod.string().optional().nullable(),
   });
 

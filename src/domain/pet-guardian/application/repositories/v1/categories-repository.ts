@@ -6,7 +6,7 @@ import { IFindManyCategoriesParametersDTO } from '../../dtos/find-many-categorie
 import { IFindManyCategoriesResponseDTO } from '../../dtos/find-many-categories-response-dto';
 
 export interface ICategoriesRepository {
-  create({ name, icon }: ICreateCategoryDTO): Promise<Category>;
+  create({ name }: ICreateCategoryDTO): Promise<Category>;
   findAll({
     searchAndPageParams: { searchParam, page, perPage },
     enabled,

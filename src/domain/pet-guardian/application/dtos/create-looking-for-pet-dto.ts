@@ -1,4 +1,4 @@
-interface ICreateLookingForPetDTO {
+export interface ICreateLookingForPetDTO {
   name_pet: string;
   breed: string;
   gender: string;
@@ -18,5 +18,3 @@ interface ICreateLookingForPetDTO {
   user_id?: string;
   enabled?: boolean;
 }
-
-export { ICreateLookingForPetDTO };

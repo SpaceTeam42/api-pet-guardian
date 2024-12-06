@@ -17,8 +17,8 @@ export class CategoriesRepository implements ICategoriesRepository {
     this.ormRepository = postgresDataSource.getRepository(Category);
   }
 
-  async create({ name, icon }: ICreateCategoryDTO): Promise<Category> {
-    const category = this.ormRepository.create({ name, icon });
+  async create({ name }: ICreateCategoryDTO): Promise<Category> {
+    const category = this.ormRepository.create({ name });
 
     await this.ormRepository.save(category);
 
