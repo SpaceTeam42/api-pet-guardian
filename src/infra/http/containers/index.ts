@@ -20,6 +20,16 @@ import { TutorsRepository } from '@infra/database/repositories/typeorm/typeorm-t
 import { ICategoriesRepository } from '@domain/pet-guardian/application/repositories/v1/categories-repository';
 import { CategoriesRepository } from '@infra/database/repositories/typeorm/typeorm-categories-repository';
 
+// ADOPTIONS
+import { IAdoptionsRepository } from '@domain/pet-guardian/application/repositories/v1/adotions-repository';
+import { AdoptionsRepository } from '@infra/database/repositories/typeorm/typeorm-adoptions-repository';
+
+// PETS
+import { IPetsRepository } from '@domain/pet-guardian/application/repositories/v1/pets-repository';
+import { PetsRepository } from '@infra/database/repositories/typeorm/typeorm-pets-repository';
+
+// USERS
+
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
   UsersRepository,
@@ -48,3 +58,14 @@ container.registerSingleton<ICategoriesRepository>(
   'CategoriesRepository',
   CategoriesRepository,
 );
+
+// ADOPTIONS
+
+container.registerSingleton<IAdoptionsRepository>(
+  'AdoptionsRepository',
+  AdoptionsRepository,
+);
+
+// PETS
+
+container.registerSingleton<IPetsRepository>('PetsRepository', PetsRepository);
