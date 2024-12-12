@@ -6,7 +6,6 @@ export type ICreatePetDTO = {
   gender: string;
   size: string;
   weight: string;
-  avatar: string;
   city: string;
   state: string;
   tutor_id: string;

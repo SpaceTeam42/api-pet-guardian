@@ -17,7 +17,6 @@ export interface IPetsRepository {
     weight,
     city,
     state,
-    avatar,
     tutor_id,
     description,
   }: ICreatePetDTO): Promise<Pet>;

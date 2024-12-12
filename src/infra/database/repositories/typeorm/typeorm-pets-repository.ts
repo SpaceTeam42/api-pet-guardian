@@ -28,7 +28,6 @@ export class PetsRepository implements IPetsRepository {
     weight,
     city,
     state,
-    avatar,
     tutor_id,
     description,
   }: ICreatePetDTO): Promise<Pet> {
@@ -42,7 +41,6 @@ export class PetsRepository implements IPetsRepository {
       weight,
       city,
       state,
-      avatar,
       tutor_id,
       description,
     });
