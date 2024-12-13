@@ -8,6 +8,10 @@ import { authenticateTutorRoutes } from './v1/authenticate-tutor-routes';
 
 import { categoryRoutes } from './v1/category-routes';
 
+// PETS
+
+import { petRoutes } from './v1/pet-routes';
+
 export async function appRoutes(app: FastifyInstance) {
   // SECTION - USERS
 
@@ -33,5 +37,11 @@ export async function appRoutes(app: FastifyInstance) {
 
   app.register(categoryRoutes, {
     prefix: '/v1/categories',
+  });
+
+  // SECTION - PETS
+
+  app.register(petRoutes, {
+    prefix: '/v1/pets',
   });
 }

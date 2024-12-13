@@ -16,13 +16,12 @@ export async function createPetController(
 ) {
   const createPetBodySchema = zod.object({
     name: zod.string(),
-    birthday: zod.date(),
+    birthday: zod.string(),
     breed: zod.string(),
     category_id: zod.string().uuid(),
     gender: zod.string(),
     size: zod.string(),
     weight: zod.string(),
-    tutor_id: zod.string().uuid(),
     description: zod.string(),
     city: zod.string(),
     state: zod.string(),
@@ -36,24 +35,25 @@ export async function createPetController(
     gender,
     size,
     weight,
-    tutor_id,
     description,
     city,
     state,
   } = createPetBodySchema.parse(request.body);
+
+  const tutorId = request.user.sub;
 
   try {
     const createPetUseCase = container.resolve(CreatePetUseCase);
 
     const { pet } = await createPetUseCase.execute({
       name,
-      birthday,
+      birthday: new Date(birthday),
       breed,
       category_id,
       gender,
       size,
       weight,
-      tutor_id,
+      tutor_id: tutorId,
       description,
       city,
       state,
