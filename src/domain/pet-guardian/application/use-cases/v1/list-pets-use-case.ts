@@ -5,10 +5,10 @@ import { Pet } from '@infra/database/typeorm/entities/Pet';
 import { IPetsRepository } from '../../repositories/v1/pets-repository';
 
 interface IRequest {
-  adopted?: string | null;
-  // searchParam?: string | null;
+  searchParam?: string | null;
   page?: string | null;
   perPage?: string | null;
+  adopted?: string | null;
   // enabled?: string | null;
 }
 
@@ -31,14 +31,15 @@ export class ListPetsUseCase {
   ) {}
 
   async execute({
-    adopted = ADOPTED_ENABLED_PAGE_PER_PAGE_PARAM_DEFAULT.ADOPTED,
+    searchParam,
     page,
     perPage = ADOPTED_ENABLED_PAGE_PER_PAGE_PARAM_DEFAULT.PER_PAGE,
+    adopted = ADOPTED_ENABLED_PAGE_PER_PAGE_PARAM_DEFAULT.ADOPTED,
     // enabled = ENABLED_PAGE_PER_PAGE_PARAM_DEFAULT.ENABLED,
   }: IRequest): Promise<IResponse> {
     const { pets, totalPets } = await this.petsRepository.findAll({
+      searchAndPageParams: { searchParam, page, perPage },
       adopted,
-      searchAndPageParams: { page, perPage },
     });
 
     return { pets, totalPets };

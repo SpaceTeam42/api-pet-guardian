@@ -4,6 +4,8 @@ import { z as zod } from 'zod';
 
 import { container } from 'tsyringe';
 
+import { instanceToInstance } from 'class-transformer';
+
 import { AppError } from '@core/errors/AppError';
 
 import { ListPetsUseCase } from '@domain/pet-guardian/application/use-cases/v1/list-pets-use-case';
@@ -13,21 +15,30 @@ export async function listPetsController(
   reply: FastifyReply,
 ) {
   const listPetsQueryParamsSchema = zod.object({
-    adopted: zod.string().optional().nullable(),
-    // searchParam: zod.string().optional().nullable(),
+    searchParam: zod.string().optional().nullable(),
     page: zod.string().optional().nullable(),
     perPage: zod.string().optional().nullable(),
+    adopted: zod.string().optional().nullable(),
     // enabled: zod.string().optional().nullable(),
   });
 
-  const { adopted, page, perPage } = listPetsQueryParamsSchema.parse(
-    request.query,
-  );
+  const { searchParam, page, perPage, adopted } =
+    listPetsQueryParamsSchema.parse(request.query);
 
   try {
     const listPetsUseCase = container.resolve(ListPetsUseCase);
 
-    const {} = await listPetsUseCase.execute({ adopted, page, perPage });
+    const { pets, totalPets } = await listPetsUseCase.execute({
+      searchParam,
+      page,
+      perPage,
+      adopted,
+    });
+
+    return reply
+      .status(200)
+      .header('x-total-count-registers', totalPets)
+      .send(instanceToInstance({ pets }));
   } catch (error) {
     if (error instanceof AppError) {
       return reply.status(error.statusCode).send({

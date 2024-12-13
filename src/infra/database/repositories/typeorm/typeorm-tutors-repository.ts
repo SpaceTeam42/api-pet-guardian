@@ -124,6 +124,7 @@ export class TutorsRepository implements ITutorsRepository {
           skip: (Number(page) - 1) * Number(perPage),
           // quantos itens queremos
           take: Number(perPage),
+          relations: ['pets'],
           order: {
             name: 'ASC',
           },
@@ -144,6 +145,7 @@ export class TutorsRepository implements ITutorsRepository {
               enabled: enabled === 'true',
             },
           ],
+          relations: ['pets'],
           order: {
             name: 'ASC',
           },
@@ -171,6 +173,7 @@ export class TutorsRepository implements ITutorsRepository {
           skip: (Number(page) - 1) * Number(perPage),
           // quantos itens queremos
           take: Number(perPage),
+          relations: ['pets'],
           order: {
             name: 'ASC',
           },
@@ -183,7 +186,7 @@ export class TutorsRepository implements ITutorsRepository {
             // id: Not(authenticateTutorId),
             enabled: enabled === 'true',
           },
-
+          relations: ['pets'],
           order: {
             name: 'ASC',
           },
