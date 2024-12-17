@@ -2,17 +2,17 @@ import { inject, injectable } from 'tsyringe';
 
 import { AppError } from '@core/errors/AppError';
 
-import { ICategoriesRepository } from '../repositories/v1/categories-repository';
+import { ICategoriesRepository } from '../../repositories/v1/categories-repository';
 
-import { ITutorsRepository } from '../repositories/v1/tutors-repository';
+import { ITutorsRepository } from '../../repositories/v1/tutors-repository';
 
-import { IPetsRepository } from '../repositories/v1/pets-repository';
+import { IPetsRepository } from '../../repositories/v1/pets-repository';
 
 import { Pet } from '@infra/database/typeorm/entities/Pet';
 
 interface IRequest {
   name: string;
-  birthday: Date;
+  birthday: string;
   breed: string;
   category_id: string;
   gender: string;
@@ -74,9 +74,11 @@ export class CreatePetUseCase {
       throw new AppError('Size is not valid!', 400);
     }
 
+    const [ano, mes, dia] = birthday.split('-').map((v) => parseInt(v));
+
     const pet = await this.petsRepository.create({
       name,
-      birthday,
+      birthday: new Date(ano, mes - 1, dia),
       breed,
       category_id,
       gender: Pet.getPetGenderEnum(gender),
