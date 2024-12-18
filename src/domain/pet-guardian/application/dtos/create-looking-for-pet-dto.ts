@@ -11,7 +11,6 @@ export interface ICreateLookingForPetDTO {
   is_found: boolean;
   is_reward?: boolean;
   reward_amount?: number;
-  avatar: string;
   state: string;
   city: string;
   tutor_id?: string;
