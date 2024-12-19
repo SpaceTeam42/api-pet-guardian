@@ -61,6 +61,7 @@ export class CreateLookingForPets1670417751561 implements MigrationInterface {
           {
             name: 'avatar',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'state',

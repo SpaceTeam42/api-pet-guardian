@@ -11,6 +11,7 @@ import { categoryRoutes } from './v1/category-routes';
 // PETS
 
 import { petRoutes } from './v1/pet-routes';
+import { lookingForPetRoutes } from './v1/looking-for-pet-routes';
 
 export async function appRoutes(app: FastifyInstance) {
   // SECTION - USERS
@@ -43,5 +44,10 @@ export async function appRoutes(app: FastifyInstance) {
 
   app.register(petRoutes, {
     prefix: '/v1/pets',
+  });
+
+  // SECTION - LOOKING FOR PETS
+  app.register(lookingForPetRoutes, {
+    prefix: '/v1/looking_for_pets',
   });
 }

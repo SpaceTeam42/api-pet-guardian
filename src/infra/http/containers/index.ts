@@ -28,6 +28,11 @@ import { AdoptionsRepository } from '@infra/database/repositories/typeorm/typeor
 import { IPetsRepository } from '@domain/pet-guardian/application/repositories/v1/pets-repository';
 import { PetsRepository } from '@infra/database/repositories/typeorm/typeorm-pets-repository';
 
+// LOOKING FOR PETS
+
+import { ILookingForPetsRepository } from '@domain/pet-guardian/application/repositories/v1/looking-for-pets-repository';
+import { LookingForPetsRepository } from '@infra/database/repositories/typeorm/typeorm-looking-for-pets-repository';
+
 // USERS
 
 container.registerSingleton<IUsersRepository>(
@@ -69,3 +74,10 @@ container.registerSingleton<IAdoptionsRepository>(
 // PETS
 
 container.registerSingleton<IPetsRepository>('PetsRepository', PetsRepository);
+
+// LOOKING FOR PETS
+
+container.registerSingleton<ILookingForPetsRepository>(
+  'LookingForPetsRepository',
+  LookingForPetsRepository,
+);
