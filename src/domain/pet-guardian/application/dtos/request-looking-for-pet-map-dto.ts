@@ -3,7 +3,7 @@ import { User } from '@infra/database/typeorm/entities/User';
 import { LookingForPet } from '@infra/database/typeorm/entities/LookingForPet';
 
 export type IRequestLookingForPetMapDTO = {
-  lookingForPet: LookingForPet;
+  pets: LookingForPet;
   tutor?: Tutor;
   user?: User;
 };
