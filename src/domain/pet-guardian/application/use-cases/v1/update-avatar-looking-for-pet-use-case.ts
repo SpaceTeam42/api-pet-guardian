@@ -21,7 +21,7 @@ interface IResponse {
 @injectable()
 export class UpdateAvatarLookingForPetPetUseCase {
   constructor(
-    @inject('PetsRepository')
+    @inject('LookingForPetsRepository')
     private lookingForPetRepository: ILookingForPetsRepository,
 
     @inject('StorageProvider')
