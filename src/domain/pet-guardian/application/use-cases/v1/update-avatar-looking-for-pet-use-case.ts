@@ -29,12 +29,7 @@ export class UpdateAvatarLookingForPetPetUseCase {
   ) {}
 
   async execute({ id, avatarFilename }: IRequest): Promise<IResponse> {
-    console.log('🚀 ~ UpdateAvatarLookingForPetPetUseCase ~ execute ~ id:', id);
     const pet = await this.lookingForPetRepository.findById({ id });
-    console.log(
-      '🚀 ~ UpdateAvatarLookingForPetPetUseCase ~ execute ~ pet:',
-      pet,
-    );
 
     if (!pet) {
       throw new AppError('Pet not found!', 404);

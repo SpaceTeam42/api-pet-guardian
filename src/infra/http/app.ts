@@ -2,6 +2,8 @@ import 'reflect-metadata';
 
 import fastifyMultipart from '@fastify/multipart';
 
+import fastifyStatic from '@fastify/static';
+
 import cors from '@fastify/cors';
 
 import fastify from 'fastify';
@@ -18,6 +20,8 @@ import { env } from '../env';
 
 import axios, { AxiosError } from 'axios';
 
+import uploadConfig from '@config/upload';
+
 import '@infra/database/typeorm';
 
 import '@infra/http/containers';
@@ -28,6 +32,11 @@ export const app = fastify();
 
 // MULTER
 app.register(fastifyMultipart);
+
+// STATIC ROUTES
+app.register(fastifyStatic, {
+  root: uploadConfig.tmpFolder,
+});
 
 // CORS
 app.register(cors, {
