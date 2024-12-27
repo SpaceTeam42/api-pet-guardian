@@ -4,9 +4,10 @@ import { AppError } from '@core/errors/AppError';
 
 import { ILookingForPetsRepository } from '../../repositories/v1/looking-for-pets-repository';
 
-import { LookingForPet } from '@infra/database/typeorm/entities/LookingForPet';
 import { ITutorsRepository } from '../../repositories/v1/tutors-repository';
 import { IUsersRepository } from '../../repositories/v1/users-repository';
+
+import { LookingForPet } from '@infra/database/typeorm/entities/LookingForPet';
 
 interface IRequest {
   name_pet: string;

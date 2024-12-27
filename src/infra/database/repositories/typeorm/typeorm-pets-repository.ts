@@ -98,7 +98,7 @@ export class PetsRepository implements IPetsRepository {
           skip: (Number(page) - 1) * Number(perPage),
           // quantos itens queremos
           take: Number(perPage),
-          relations: ['category', 'tutor'],
+          relations: ['category', 'tutor', 'pet_images'],
           order: {
             name: 'ASC',
           },
@@ -111,7 +111,7 @@ export class PetsRepository implements IPetsRepository {
             name: ILike(`%${searchParam}%`),
             adopted: adopted === 'true',
           },
-          relations: ['category', 'tutor'],
+          relations: ['category', 'tutor', 'pet_images'],
           order: {
             name: 'ASC',
           },
@@ -137,7 +137,7 @@ export class PetsRepository implements IPetsRepository {
           skip: (Number(page) - 1) * Number(perPage),
           // quantos itens queremos
           take: Number(perPage),
-          relations: ['category', 'tutor'],
+          relations: ['category', 'tutor', 'pet_images'],
           order: {
             name: 'ASC',
           },
@@ -149,7 +149,7 @@ export class PetsRepository implements IPetsRepository {
           where: {
             adopted: adopted === 'true',
           },
-          relations: ['category', 'tutor'],
+          relations: ['category', 'tutor', 'pet_images'],
           order: {
             name: 'ASC',
           },
@@ -192,7 +192,7 @@ export class PetsRepository implements IPetsRepository {
         skip: (Number(page) - 1) * Number(perPage),
         // quantos itens queremos
         take: Number(perPage),
-        relations: ['category', 'tutor'],
+        relations: ['category', 'tutor', 'pet_images'],
         order: {
           name: 'ASC',
         },
@@ -205,7 +205,7 @@ export class PetsRepository implements IPetsRepository {
           tutor_id: tutorId,
           adopted: adopted === 'true',
         },
-        relations: ['category', 'tutor'],
+        relations: ['category', 'tutor', 'pet_images'],
         order: {
           name: 'ASC',
         },
@@ -220,7 +220,7 @@ export class PetsRepository implements IPetsRepository {
   async findByTutorId(tutor_id: string): Promise<Pet | null> {
     return this.ormRepository.findOne({
       where: { tutor_id },
-      relations: ['category', 'tutor'],
+      relations: ['category', 'tutor', 'pet_images'],
     });
   }
 

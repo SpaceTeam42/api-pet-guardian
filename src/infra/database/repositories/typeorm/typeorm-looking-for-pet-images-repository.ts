@@ -31,6 +31,16 @@ export class LookingForPetImagesRepository
     return lookingForPetImages;
   }
 
+  async findAllByLookingForPetId(
+    lookingForPetId: string,
+  ): Promise<LookingForPetImage[]> {
+    const lookingForPetImages = await this.ormRepository.find({
+      where: { looking_for_pet_id: lookingForPetId },
+    });
+
+    return lookingForPetImages;
+  }
+
   async findById(id: string): Promise<LookingForPetImage> {
     const lookingForPetImage = await this.ormRepository.findOne({
       where: { id },

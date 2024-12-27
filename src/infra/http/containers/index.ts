@@ -28,6 +28,9 @@ import { AdoptionsRepository } from '@infra/database/repositories/typeorm/typeor
 import { IPetsRepository } from '@domain/pet-guardian/application/repositories/v1/pets-repository';
 import { PetsRepository } from '@infra/database/repositories/typeorm/typeorm-pets-repository';
 
+import { IPetImagesRepository } from '@domain/pet-guardian/application/repositories/v1/pet-imagens-repository';
+import { PetImagesRepository } from '@infra/database/repositories/typeorm/typeorm-pet-images-repository';
+
 // LOOKING FOR PETS
 
 import { ILookingForPetsRepository } from '@domain/pet-guardian/application/repositories/v1/looking-for-pets-repository';
@@ -77,6 +80,11 @@ container.registerSingleton<IAdoptionsRepository>(
 // PETS
 
 container.registerSingleton<IPetsRepository>('PetsRepository', PetsRepository);
+
+container.registerSingleton<IPetImagesRepository>(
+  'PetImagesRepository',
+  PetImagesRepository,
+);
 
 // LOOKING FOR PETS
 

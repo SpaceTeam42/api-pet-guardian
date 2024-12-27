@@ -10,6 +10,9 @@ import { showLookingForPetController } from '@infra/http/controllers/v1/show-loo
 import { updateLookingForPetController } from '@infra/http/controllers/v1/update-looking-for-pet-controller';
 import { updateAvatarLookingForPetController } from '@infra/http/controllers/v1/update-avatar-looking-for-pet-controller';
 
+import { deleteLookingForPetController } from '@infra/http/controllers/v1/delete-looking-for-pet-controller';
+import { deleteLookingForPetImageController } from '@infra/http/controllers/v1/delete-looking-for-pet-image-controller';
+
 export async function lookingForPetRoutes(app: FastifyInstance) {
   app.post('/', createLookingForPetController);
   app.post('/addImages/:id', createLookingForPetImagesController);
@@ -21,4 +24,7 @@ export async function lookingForPetRoutes(app: FastifyInstance) {
   app.put('/', updateLookingForPetController);
 
   app.patch('/avatar/:id', updateAvatarLookingForPetController);
+
+  app.delete('/:id', deleteLookingForPetController);
+  app.delete('/image/:image_id', deleteLookingForPetImageController);
 }
