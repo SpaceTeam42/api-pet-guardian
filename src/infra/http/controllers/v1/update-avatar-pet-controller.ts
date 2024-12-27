@@ -27,8 +27,9 @@ export async function updateAvatarPetController(
   try {
     const fileData = await request.file();
 
-    const { createWriteStream, fileNameFormatted } =
-      uploadConfig.createFileUpload(fileData.filename);
+    const { createWriteStream, fileNameHash } = uploadConfig.createFileUpload(
+      fileData.filename,
+    );
 
     await pipeline(fileData.file, createWriteStream);
 
@@ -36,7 +37,7 @@ export async function updateAvatarPetController(
 
     const { pet } = await updateAvatarPetUseCase.execute({
       id,
-      avatarFilename: fileNameFormatted,
+      avatarFilename: fileNameHash,
     });
 
     return reply.status(200).send(instanceToInstance({ pet }));

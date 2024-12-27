@@ -162,10 +162,6 @@ export class LookingForPetsRepository implements ILookingForPetsRepository {
     id,
     with_relation,
   }: IFindByIdLookingForPetDTO): Promise<LookingForPet | null> {
-    console.log(
-      '🚀 ~ LookingForPetsRepository ~ with_relation:',
-      with_relation,
-    );
     if (with_relation) {
       return this.ormRepository.findOne({
         where: { id },

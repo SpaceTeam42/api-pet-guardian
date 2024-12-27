@@ -27,7 +27,7 @@ export async function updateCategoryIconController(
   try {
     const fileData = await request.file();
 
-    const { createWriteStream, fileNameFormatted } =
+    const { createWriteStream, fileNameHash: fileNameFormatted } =
       uploadConfig.createFileUpload(fileData.filename);
 
     await pipeline(fileData.file, createWriteStream);

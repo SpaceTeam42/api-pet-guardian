@@ -1,6 +1,7 @@
 import { FastifyInstance } from 'fastify';
 
 import { createLookingForPetController } from '@infra/http/controllers/v1/create-looking-for-pet-controller';
+import { createLookingForPetImagesController } from '@infra/http/controllers/v1/create-looking-for-pet-imagens-controller';
 
 import { listLookingForPetsController } from '@infra/http/controllers/v1/list-looking-for-pets-controller';
 import { listLookingForPetsByTutorIdController } from '@infra/http/controllers/v1/list-looking-for-pets-tutor-id-controller';
@@ -11,6 +12,7 @@ import { updateAvatarLookingForPetController } from '@infra/http/controllers/v1/
 
 export async function lookingForPetRoutes(app: FastifyInstance) {
   app.post('/', createLookingForPetController);
+  app.post('/addImages/:id', createLookingForPetImagesController);
 
   app.get('/', listLookingForPetsController);
   app.get('/tutor', listLookingForPetsByTutorIdController);

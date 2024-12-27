@@ -11,7 +11,7 @@ const tmpFolder = path.resolve(__dirname, '..', '..', 'tmp');
 
 interface ICreateFileUpload {
   createWriteStream: fs.WriteStream;
-  fileNameFormatted: string;
+  fileNameHash: string;
 }
 
 interface IUploadConfig {
@@ -46,15 +46,15 @@ export default {
   createFileUpload: (fileName) => {
     const fileHash = crypto.randomBytes(10).toString('hex');
 
-    const fileNameFormatted = `${fileHash}-${fileName}`.replace(/\s/g, '');
+    const fileNameHash = `${fileHash}-${fileName}`.replace(/\s/g, '');
 
     const createWriteStream = fs.createWriteStream(
-      `${tmpFolder}/${fileNameFormatted}`,
+      `${tmpFolder}/${fileNameHash}`,
     );
 
     return {
       createWriteStream,
-      fileNameFormatted,
+      fileNameHash,
     };
   },
 
