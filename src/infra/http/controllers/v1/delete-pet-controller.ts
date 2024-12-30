@@ -6,24 +6,22 @@ import { container } from 'tsyringe';
 
 import { AppError } from '@core/errors/AppError';
 
-import { DeleteLookingForPetUseCase } from '@domain/pet-guardian/application/use-cases/v1/delete-looking-for-pet-use-case';
+import { DeletePetUseCase } from '@domain/pet-guardian/application/use-cases/v1/delete-pet-use-case';
 
-export async function deleteLookingForPetController(
+export async function deletePetController(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
-  const deleteLookingForPetRouteParamsSchema = zod.object({
+  const deletePetRouteParamsSchema = zod.object({
     id: zod.string().uuid(),
   });
 
-  const { id } = deleteLookingForPetRouteParamsSchema.parse(request.params);
+  const { id } = deletePetRouteParamsSchema.parse(request.params);
 
   try {
-    const deleteLookingForPetUseCase = container.resolve(
-      DeleteLookingForPetUseCase,
-    );
+    const deletePetUseCase = container.resolve(DeletePetUseCase);
 
-    await deleteLookingForPetUseCase.execute({ id });
+    await deletePetUseCase.execute({ id });
 
     return reply.status(204).send();
   } catch (error) {

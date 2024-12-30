@@ -13,6 +13,9 @@ import { showPetController } from '@infra/http/controllers/v1/show-pet-controlle
 import { updatePetController } from '@infra/http/controllers/v1/update-pet-controller';
 import { updateAvatarPetController } from '@infra/http/controllers/v1/update-avatar-pet-controller';
 
+import { deletePetController } from '@infra/http/controllers/v1/delete-pet-controller';
+import { deletePetImageController } from '@infra/http/controllers/v1/delete-pet-image-controller';
+
 export async function petRoutes(app: FastifyInstance) {
   app.post(
     '/',
@@ -27,4 +30,7 @@ export async function petRoutes(app: FastifyInstance) {
   app.put('/', updatePetController);
 
   app.patch('/avatar/:id', updateAvatarPetController);
+
+  app.delete('/:id', deletePetController);
+  app.delete('/image/:image_id', deletePetImageController);
 }

@@ -12,11 +12,11 @@ export async function deleteLookingForPetImageController(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
-  const deleteLookingForPetRouteParamsSchema = zod.object({
+  const deleteLookingForPetImageRouteParamsSchema = zod.object({
     image_id: zod.string().uuid(),
   });
 
-  const { image_id } = deleteLookingForPetRouteParamsSchema.parse(
+  const { image_id } = deleteLookingForPetImageRouteParamsSchema.parse(
     request.params,
   );
 
@@ -27,7 +27,7 @@ export async function deleteLookingForPetImageController(
 
     await deleteLookingForPetImageUseCase.execute({ id: image_id });
 
-    return reply.status(204).send({ message: 'Success' });
+    return reply.status(204).send();
   } catch (error) {
     if (error instanceof AppError) {
       return reply.status(error.statusCode).send({
@@ -35,5 +35,7 @@ export async function deleteLookingForPetImageController(
         message: error.message,
       });
     }
+
+    throw error;
   }
 }

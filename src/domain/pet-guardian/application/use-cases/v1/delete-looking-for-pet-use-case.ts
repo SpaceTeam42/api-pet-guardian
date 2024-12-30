@@ -33,6 +33,13 @@ export class DeleteLookingForPetUseCase {
       throw new AppError('Pet not found!', 404);
     }
 
+    if (lookingForPets.avatar) {
+      await this.storageProvider.delete(
+        lookingForPets.avatar,
+        uploadConfig.petsFolder,
+      );
+    }
+
     // DELETE IMAGES IF EXISTS
     const lookingForPetImages =
       await this.lookingForPetImagesRepository.findAllByLookingForPetId(
@@ -47,6 +54,7 @@ export class DeleteLookingForPetUseCase {
       }
     }
 
+    // DELETE LOOKING FOR PET
     await this.lookingForPetsRepository.delete(id);
   }
 }
