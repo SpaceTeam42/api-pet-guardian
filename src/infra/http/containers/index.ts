@@ -39,6 +39,16 @@ import { LookingForPetsRepository } from '@infra/database/repositories/typeorm/t
 import { ILookingForPetImagesRepository } from '@domain/pet-guardian/application/repositories/v1/looking-for-pet-images-repository';
 import { LookingForPetImagesRepository } from '@infra/database/repositories/typeorm/typeorm-looking-for-pet-images-repository';
 
+// WRITERS
+
+import { IWritersRepository } from '@domain/pet-guardian/application/repositories/v1/writers-repository';
+import { WritersRepository } from '@infra/database/repositories/typeorm/typeorm-writers-repository';
+
+// NEWS
+
+import { INewsRepository } from '@domain/pet-guardian/application/repositories/v1/news-repository';
+import { NewsRepository } from '@infra/database/repositories/typeorm/typeorm-news-repository';
+
 // USERS
 
 container.registerSingleton<IUsersRepository>(
@@ -97,3 +107,11 @@ container.register<ILookingForPetImagesRepository>(
   'LookingForPetImagesRepository',
   LookingForPetImagesRepository,
 );
+
+// WRITERS
+
+container.register<IWritersRepository>('WritersRepository', WritersRepository);
+
+// NEWS
+
+container.register<INewsRepository>('NewsRepository', NewsRepository);

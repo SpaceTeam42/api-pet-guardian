@@ -13,6 +13,10 @@ import { categoryRoutes } from './v1/category-routes';
 import { petRoutes } from './v1/pet-routes';
 import { lookingForPetRoutes } from './v1/looking-for-pet-routes';
 
+//  WRITERS
+
+import { writerRoutes } from './v1/writer-routes';
+
 export async function appRoutes(app: FastifyInstance) {
   // SECTION - USERS
 
@@ -49,5 +53,10 @@ export async function appRoutes(app: FastifyInstance) {
   // SECTION - LOOKING FOR PETS
   app.register(lookingForPetRoutes, {
     prefix: '/v1/looking_for_pets',
+  });
+
+  // SECTION - NEWS
+  app.register(writerRoutes, {
+    prefix: '/v1/writers',
   });
 }
