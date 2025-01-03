@@ -6,7 +6,7 @@ import { z as zod } from 'zod';
 
 import { AppError } from '@core/errors/AppError';
 
-import { UpdateUserPassword } from '@domain/pet-guardian/application/use-cases/v1/update-user-password';
+import { UpdateUserPasswordUseCase } from '@domain/pet-guardian/application/use-cases/v1/update-user-password-use-case';
 
 export async function updateUserPasswordController(
   request: FastifyRequest,
@@ -24,7 +24,9 @@ export async function updateUserPasswordController(
   );
 
   try {
-    const updateUserPasswordUseCase = container.resolve(UpdateUserPassword);
+    const updateUserPasswordUseCase = container.resolve(
+      UpdateUserPasswordUseCase,
+    );
 
     await updateUserPasswordUseCase.execute({
       id: userId,

@@ -8,6 +8,7 @@ import { showWriterController } from '@infra/http/controllers/v1/show-writer-con
 import { verifyJWT } from '@infra/http/middlewares/verify-jwt';
 import { ensuredWriterAuthenticated } from '@infra/http/middlewares/ensured-writer-authenticated';
 import { updateWriterController } from '@infra/http/controllers/v1/update-writer-controller';
+import { updateAvatarWriterController } from '@infra/http/controllers/v1/update-avatar-writer-controller';
 
 export async function writerRoutes(app: FastifyInstance) {
   app.post('/', createWriterController);
@@ -23,4 +24,12 @@ export async function writerRoutes(app: FastifyInstance) {
   );
 
   app.put('/', updateWriterController);
+
+  app.patch(
+    '/update/avatar',
+    {
+      onRequest: [verifyJWT, ensuredWriterAuthenticated],
+    },
+    updateAvatarWriterController,
+  );
 }
