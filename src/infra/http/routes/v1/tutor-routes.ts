@@ -18,6 +18,7 @@ import { meTutorController } from '@infra/http/controllers/v1/me-tutor-controlle
 import { showTutorController } from '@infra/http/controllers/v1/show-tutor-controller';
 
 import { deleteTutorController } from '@infra/http/controllers/v1/delete-tutor-controller';
+import { updateTutorPasswordController } from '@infra/http/controllers/v1/update-tutor-password-controller';
 
 export async function tutorRoutes(app: FastifyInstance) {
   // const { storage } = uploadConfig.multer;
@@ -44,15 +45,6 @@ export async function tutorRoutes(app: FastifyInstance) {
 
   app.get('/show/:id', showTutorController);
 
-  app.patch(
-    '/update/avatar',
-    {
-      onRequest: [verifyJWT, ensuredTutorAuthenticated],
-      // preHandler: upload.single('avatar'),
-    },
-    updateAvatarTutorController,
-  );
-
   app.put(
     '/',
     { onRequest: [verifyJWT, ensuredTutorAuthenticated] },
@@ -63,6 +55,21 @@ export async function tutorRoutes(app: FastifyInstance) {
     '/update/byUser',
     { onRequest: [verifyJWT, ensuredUserAuthenticated] },
     updateTutorController,
+  );
+
+  app.patch(
+    '/update/avatar',
+    {
+      onRequest: [verifyJWT, ensuredTutorAuthenticated],
+      // preHandler: upload.single('avatar'),
+    },
+    updateAvatarTutorController,
+  );
+
+  app.patch(
+    '/update/password',
+    { onRequest: [verifyJWT, ensuredTutorAuthenticated] },
+    updateTutorPasswordController,
   );
 
   app.delete(
