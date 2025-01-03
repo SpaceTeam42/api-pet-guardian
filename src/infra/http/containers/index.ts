@@ -44,6 +44,9 @@ import { LookingForPetImagesRepository } from '@infra/database/repositories/type
 import { IWritersRepository } from '@domain/pet-guardian/application/repositories/v1/writers-repository';
 import { WritersRepository } from '@infra/database/repositories/typeorm/typeorm-writers-repository';
 
+import { IWriterRefreshTokensRepository } from '@domain/pet-guardian/application/repositories/v1/writer-refresh-tokens-repository';
+import { WriterRefreshTokensRepository } from '@infra/database/repositories/typeorm/typeorm-writer-refresh-tokens-repository';
+
 // NEWS
 
 import { INewsRepository } from '@domain/pet-guardian/application/repositories/v1/news-repository';
@@ -111,6 +114,11 @@ container.register<ILookingForPetImagesRepository>(
 // WRITERS
 
 container.register<IWritersRepository>('WritersRepository', WritersRepository);
+
+container.register<IWriterRefreshTokensRepository>(
+  'WriterRefreshTokensRepository',
+  WriterRefreshTokensRepository,
+);
 
 // NEWS
 

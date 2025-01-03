@@ -36,7 +36,11 @@ export async function tutorRoutes(app: FastifyInstance) {
     listTutorsController,
   );
 
-  app.get('/me', { onRequest: verifyJWT }, meTutorController);
+  app.get(
+    '/me',
+    { onRequest: [verifyJWT, ensuredTutorAuthenticated] },
+    meTutorController,
+  );
 
   app.get('/show/:id', showTutorController);
 

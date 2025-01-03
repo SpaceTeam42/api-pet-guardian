@@ -16,6 +16,7 @@ import { lookingForPetRoutes } from './v1/looking-for-pet-routes';
 //  WRITERS
 
 import { writerRoutes } from './v1/writer-routes';
+import { authenticateWriterRoutes } from './v1/authenticate-writer-routes';
 
 export async function appRoutes(app: FastifyInstance) {
   // SECTION - USERS
@@ -58,5 +59,9 @@ export async function appRoutes(app: FastifyInstance) {
   // SECTION - NEWS
   app.register(writerRoutes, {
     prefix: '/v1/writers',
+  });
+
+  app.register(authenticateWriterRoutes, {
+    prefix: '/v1/authenticate_writer',
   });
 }
